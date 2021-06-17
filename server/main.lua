@@ -191,7 +191,7 @@ QBCore.Functions.CreateCallback('qb-atms:server:loadBankAccount', function(sourc
         banking['accountinfo'] = xCH.PlayerData.charinfo.account
         banking['cash'] = xPlayer.Functions.GetMoney('cash')
     else
-        QBCore.Functions.ExecuteSql(true, {['a'] = info.citizenid}, "SELECT * FROM `players` WHERE `citizenid` = @a", function(player)
+        QBCore.Functions.ExecuteSql(true, {['a'] = cardHolder}, "SELECT * FROM `players` WHERE `citizenid` = @a", function(player)
             local xCH = json.decode(player[1])
             banking['online'] = false
             banking['name'] = xCH.charinfo.firstname .. ' ' .. xCH.charinfo.lastname
