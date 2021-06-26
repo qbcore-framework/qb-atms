@@ -5,6 +5,8 @@ description 'QB-ATM'
 version '1.0.0'
 
 server_scripts {
+    'config.lua',
+    'locales/*.lua',
     'config/main.lua',
     'server/main.lua'
 }

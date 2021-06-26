@@ -124,7 +124,8 @@ AddEventHandler('qb-atms:client:loadATM', function(cards)
             if atm then 
                 local obj = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, 2.0, hash, false, false, false)
                 local atmCoords = GetEntityCoords(obj, false)
-                QBCore.Functions.Progressbar("accessing_atm", "Accessing ATM", 1500, false, true, {
+                QBCore.Functions.Progressbar("accessing_atm", QBCore.Shared._U(Locales, 
+                'client_main_event_loadATM_progressbar_1'), 1500, false, true, {
                     disableMovement = false,
                     disableCarMovement = false,
                     disableMouse = false,
@@ -136,12 +137,13 @@ AddEventHandler('qb-atms:client:loadATM', function(cards)
                         cards = cards,
                     })
                 end, function()
-                    QBCore.Functions.Notify("Failed!", "error")
+                    QBCore.Functions.Notify(QBCore.Shared._U(Locales, 
+                    'failed'), "error")
                 end)
             end
         end     
     else
-        QBCore.Functions.Notify("You do not have a debit card to pay with, please visit a branch to order a card. or ensure one is on your person.", "error")
+        QBCore.Functions.Notify(QBCore.Shared._U(Locales, 'client_main_event_loadATM_notify_1'), "error")
     end
 end)
 
@@ -152,9 +154,9 @@ RegisterNUICallback("removeCard", function(data, cb)
             SendNUIMessage({
                 status = "closeATM"
             })
-            QBCore.Functions.Notify('Card has deleted.', 'success')
+            QBCore.Functions.Notify(QBCore.Shared._U(Locales, 'client_main_callback_removeCard_notify_1'), 'success')
         else
-            QBCore.Functions.Notify('Failed to delete card.', 'error')
+            QBCore.Functions.Notify(QBCore.Shared._U(Locales, 'client_main_callback_removeCard_notify_2'), 'error')
         end
     end, data)
 end)

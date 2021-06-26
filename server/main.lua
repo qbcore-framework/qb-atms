@@ -106,7 +106,7 @@ Citizen.CreateThread(function()
     while true do
         Wait(3600000)
         dailyWithdraws = {}
-        TriggerClientEvent('QBCore:Notify', -1, "Daily limit resetted.", "success")
+        TriggerClientEvent('QBCore:Notify', -1, QBCore.Shared._U(Locales, 'server_main_CreateThread_notify'), "success")
     end
 end)
 
@@ -133,9 +133,9 @@ AddEventHandler('qb-atms:server:doAccountWithdraw', function(data)
                     xCH.Functions.RemoveMoney('bank', tonumber(data.amount))
                     xPlayer.Functions.AddMoney('cash', tonumber(data.amount))
                     dailyWithdraws[cardHolder] = dailyWithdraws[cardHolder] + tonumber(data.amount)
-                    TriggerClientEvent('QBCore:Notify', src, "Withdraw $" .. data.amount .. ' from credit card. Daily Withdraws: ' .. dailyWithdraws[cardHolder], "success")
+                    TriggerClientEvent('QBCore:Notify', src, QBCore.Shared._U(Locales, 'server_main_event_doAccountWithdraw_notify_1', data.amount,dailyWithdraws[cardHolder]), "success")
                 else
-                    TriggerClientEvent('QBCore:Notify', src, "You cant go into minus in ATM.", "error")
+                    TriggerClientEvent('QBCore:Notify', src, QBCore.Shared._U(Locales, 'server_main_event_doAccountWithdraw_notify_2'), "error")
                 end
 
                 banking['online'] = true
@@ -152,9 +152,9 @@ AddEventHandler('qb-atms:server:doAccountWithdraw', function(data)
                         xCH.money.bank = bankCount
                         QBCore.Functions.ExecuteSql(false, "UPDATE `players` SET `money` = '" .. xCH.money .. "' WHERE `citizenid` = '" ..cardHolder.."'")
                         dailyWithdraws[cardHolder] = dailyWithdraws[cardHolder] + tonumber(data.amount)
-                        TriggerClientEvent('QBCore:Notify', src, "Withdraw $" .. data.amount .. ' from credit card. Daily Withdraws: ' .. dailyWithdraws[cardHolder], "success")
+                        TriggerClientEvent('QBCore:Notify', src, QBCore.Shared._U(Locales, 'server_main_event_doAccountWithdraw_notify_1', data.amount,dailyWithdraws[cardHolder]), "success")
                     else
-                        TriggerClientEvent('QBCore:Notify', src, "You cant go into minus in ATM.", "error")
+                        TriggerClientEvent('QBCore:Notify', src, QBCore.Shared._U(Locales, 'server_main_event_doAccountWithdraw_notify_2'), "error")
                     end
 
                     banking['online'] = false
@@ -166,7 +166,7 @@ AddEventHandler('qb-atms:server:doAccountWithdraw', function(data)
             end
             TriggerClientEvent('qb-atms:client:updateBankInformation', src, banking)
         else
-            TriggerClientEvent('QBCore:Notify', src, "You have reached the daily limit.", "error")
+            TriggerClientEvent('QBCore:Notify', src, QBCore.Shared._U(Locales, 'server_main_event_doAccountWithdraw_notify_3'), "error")
         end
     end
 end)
