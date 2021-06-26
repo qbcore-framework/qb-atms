@@ -157,3 +157,4 @@ RegisterNUICallback("removeCard", function(data, cb)
         end
     end, data)
 end)
+ 
