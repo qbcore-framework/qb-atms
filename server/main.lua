@@ -70,7 +70,7 @@ RegisterCommand('atm', function(source, args, rawCommand)
                     info.cardActive = false
                 end
             else
-                QBCore.Functions.ExecuteSql(true, "SELECT `charinfo` FROM `players` WHERE `citizenid` = '"..info.citizenid.."'", function(player)
+                exports.ghmattimysql:execute('SELECT charinfo FROM players WHERE citizenid=@citizenid', {['@citizenid'] = info.citizenid}, function(player)
                     local xCH = json.decode(player[1].charinfo)
                     if xCH.card ~= cardNum then
                         info.cardActive = false
@@ -89,7 +89,7 @@ RegisterCommand('atm', function(source, args, rawCommand)
                     info.cardActive = false
                 end
             else
-                QBCore.Functions.ExecuteSql(true, "SELECT `charinfo` FROM `players` WHERE `citizenid` = '"..info.citizenid.."'", function(player)
+                exports.ghmattimysql:execute('SELECT charinfo FROM players WHERE citizenid=@citizenid', {['@citizenid'] = info.citizenid}, function(player)
                     xCH = json.decode(player[1].charinfo)
                     if xCH.card ~= cardNum then
                         info.cardActive = false
@@ -144,13 +144,13 @@ AddEventHandler('qb-atms:server:doAccountWithdraw', function(data)
                 banking['accountinfo'] = xCH.PlayerData.charinfo.account
                 banking['cash'] = xPlayer.Functions.GetMoney('cash')
             else
-                QBCore.Functions.ExecuteSql(true, "SELECT * FROM `players` WHERE `citizenid` = '"..cardHolder.."'", function(player)
+                exports.ghmattimysql:execute('SELECT * FROM players WHERE citizenid=@citizenid', {['@citizenid'] = cardHolder}, function(player)
                     local xCH = json.decode(player[1])
                     local bankCount = tonumber(xCH.money.bank) - tonumber(data.amount)
                     if bankCount > 0  then
                         xPlayer.Functions.AddMoney('cash', tonumber(data.amount))
                         xCH.money.bank = bankCount
-                        QBCore.Functions.ExecuteSql(false, "UPDATE `players` SET `money` = '" .. xCH.money .. "' WHERE `citizenid` = '" ..cardHolder.."'")
+                        exports.ghmattimysql:execute('UPDATE players SET money=@money WHERE citizenid=@citizenid', {['@money'] = xCH.money, ['@citizenid'] = cardHolder})
                         dailyWithdraws[cardHolder] = dailyWithdraws[cardHolder] + tonumber(data.amount)
                         TriggerClientEvent('QBCore:Notify', src, QBCore.Shared._U(Locales, 'server_main_event_doAccountWithdraw_notify_1', data.amount,dailyWithdraws[cardHolder]), "success")
                     else
@@ -186,7 +186,7 @@ QBCore.Functions.CreateCallback('qb-atms:server:loadBankAccount', function(sourc
         banking['accountinfo'] = xCH.PlayerData.charinfo.account
         banking['cash'] = xPlayer.Functions.GetMoney('cash')
     else
-        QBCore.Functions.ExecuteSql(true, "SELECT * FROM `players` WHERE `citizenid` = '"..cardHolder.."'", function(player)
+        exports.ghmattimysql:execute('SELECT * FROM players WHERE citizenid=@citizenid', {['@citizenid'] = cardHolder}, function(player)
             local xCH = json.decode(player[1])
             banking['online'] = false
             banking['name'] = xCH.charinfo.firstname .. ' ' .. xCH.charinfo.lastname
