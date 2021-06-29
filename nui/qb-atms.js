@@ -9,16 +9,6 @@ var cardNumb = null;
 
 $.i18n.init({ lng: "en-EN", resGetPath: 'locales/__lng__.json' });
 
-String.prototype.format = function () {
-    var s = this,
-        i = arguments.length;
-
-    while (i--) {
-        s = s.replace(new RegExp('\\{' + i + '\\}', 'gm'), arguments[i]);
-    }
-    return s;
-};
-
 function SetLocaleLayout() {
     $(".in-locale").each(function (obj) {
         var idxlocale = $(this).data("locale");
