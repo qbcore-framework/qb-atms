@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link href="scripting/jquery-ui.css" rel="stylesheet">
- 
+   
     <title>RealisticLife Banking</title>
   </head>
   <body>
@@ -29,12 +29,12 @@
                     </div>
                     <div class="col-8">
                         <div class="card-body p-0">
-                            <h5 class="card-title pb-0 pt-1 pl-2 mb-0" id="cardOwner">Card title</h5>
+                            <h5 class="card-title pb-0 pt-1 pl-2 mb-0 in-locale" data-locale="CardTitle" id="cardOwner">Card title</h5>
                             <p class="card-text pl-2"><small class="text-muted"><span id="cardType">Visa</span><br><span id="cardNumber">************4354</span></small></p>
                         </div>
                     </div>
                     <div class="col-2 my-auto pr-1">
-                        <button class="btn btn-primary btn-sm btn-block">Use</button>
+                        <button class="btn btn-primary btn-sm btn-block in-locale" data-locale="use">Use</button>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
     </div>
     <div class="row" style="position: relative; top: 54px;">
         <div class="col-12 text-center">
-            <button class="btn" id="cancelTransaction" style="background-color: #a7000b; color: white">Cancel Transaction</button>
+            <button class="btn in-locale" data-locale="cancelTransaction" id="cancelTransaction" style="background-color: #a7000b; color: white">Cancel Transaction</button>
         </div>
     </div>
 </div>
@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 text-center p-2" style="font-size: 16px; color: white;">Please enter your debit card pin, to access the ATM.</div>
+        <div class="col-12 text-center p-2 in-locale" data-locale="enter_pin" style="font-size: 16px; color: white;" >Please enter your debit card pin, to access the ATM.</div>
     </div>
     <div class="row m-1">
         <div class="col-12 pt-2 pb-4"><input type="password" class="form-control text-center" id="pinCode" style="height:60px; line-height:60px; font-size:30px;" readonly="readonly"></div>
@@ -75,15 +75,16 @@
         <div class="col-4 text-center"><button class="btn btn-block btn-info" data-act="enterNumber" data-number="9">9</button></div>
     </div>
     <div class="row m-1" style="position: relative; top: 5px;">
-        <div class="col-4 text-center"><button class="btn btn-block btn-danger" data-act="enterNumber" data-number="CANCEL">CANCEL</button></div>
+        <div class="col-4 text-center"><button class="btn btn-block btn-danger in-locale" data-locale="cancelButton" data-act="enterNumber" data-number="CANCEL">CANCEL</button></div>
         <div class="col-4 text-center"><button class="btn btn-block btn-info" data-act="enterNumber" data-number="0">0</button></div>
-        <div class="col-4 text-center"><button class="btn btn-block btn-success" data-act="enterNumber" data-number="ACCEPT" id="acceptButton">ACCEPT</button></div>
+        <div class="col-4 text-center"><button class="btn btn-block btn-success  in-locale" data-locale="acceptButton" data-act="enterNumber" data-number="ACCEPT" id="acceptButton">ACCEPT</button></div>
     </div>
     <div class="row m-1" style="position: relative; top: 5px;">
-        <div class="col-12 text-center"><button class="btn btn-block btn-warning" data-act="enterNumber" data-number="CLEAR">CLEAR</button></div>
+        <div class="col-12 text-center"><button class="btn btn-block btn-warning  in-locale" data-locale="clearButton" data-act="enterNumber" data-number="CLEAR">CLEAR</button></div>
     </div>
     <div class="row" style="position: relative; top: 10px;">
-        <div class="col-12 text-center p-2" style="font-size: 12px; color: white; margin-bottom: 50px;">By entering your pin and pressing the accept button you are authorising a debit of $<span id="amount2">3535</span> from your bank account directly to the merchant.</div>
+        <div class="col-12 text-center p-2" style="font-size: 12px; color: white; margin-bottom: 50px;">
+            <span class="in-locale" data-locale="authmessage1"></span> <span id="amount2">3535</span> <span class="in-locale" data-locale="authmessage2"></span></div>
     </div>
 </div>
 
@@ -99,19 +100,19 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="nav flex-column nav-pills p-2 shadow-lg" id="v-pills-tab-atm" role="tablist" aria-orientation="vertical" style="background:rgba(51, 51, 51, 0.8); border-radius: 5px;">
-                                        <a class="nav-link active m-1" id="bankingHomeATM-tab" data-toggle="pill" href="#bankingHomeATM" role="tab" aria-controls="bankingHomeATM" aria-selected="true">Account Home</a>
-                                        <a class="nav-link m-1" id="bankingWithdrawATM-tab" data-toggle="pill" href="#bankingWithdrawATM" role="tab" aria-controls="bankingWithdrawATM" aria-selected="false">Withdrawals</a>
+                                        <a class="nav-link active m-1  in-locale" data-locale="AccountHome" id="bankingHomeATM-tab" data-toggle="pill" href="#bankingHomeATM" role="tab" aria-controls="bankingHomeATM" aria-selected="true">Account Home</a>
+                                        <a class="nav-link m-1  in-locale" data-locale="Withdrawals" id="bankingWithdrawATM-tab" data-toggle="pill" href="#bankingWithdrawATM" role="tab" aria-controls="bankingWithdrawATM" aria-selected="false">Withdrawals</a>
                                       </div>
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-12">
                                     <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: #007bff">
-                                        <div class="card-header">Account Information</div>
+                                        <div class="card-header  in-locale" data-locale="InfoAccount">Account Information</div>
                                             <div class="card-body">
                                                 <p class="card-text"><small>
-                                                Account Name: <span id="accountNameATM"></span><br>
-                                                Account Number: <span id="accountNumberATM""></span><br>
+                                                <span class=" in-locale" data-locale="AccountName">Account Name</span>: <span id="accountNameATM"></span><br>
+                                                <span class=" in-locale" data-locale="AccountNumber">Account Number</span>: <span id="accountNumberATM"></span><br>
                                                 </span></small></p>
                                             </div>
                                         </div>  
@@ -119,7 +120,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <button class="btn btn-block btn-danger mt-2" id="logoffbuttonatm">Logoff</button>
+                                        <button class="btn btn-block btn-danger mt-2 in-locale" data-locale="Logoff" id="logoffbuttonatm">Logoff</button>
                                     </div>
                                 </div>
                             </div>
@@ -129,9 +130,9 @@
                 <div class="tab-content p-2 shadow-lg" id="v-pills-tabContent-atm" style="max-height:780px; min-height:780px;">
                         <div class="tab-pane fade active show" id="bankingHomeATM" role="tabpanel" aria-labelledby="enteringPinTab">
                                 <div class="container-fluid p-2" style="position: relative; top: 54px;">
-                                        <<div class="row">
-                                            <div class="col-12 title"><h3 style="font-size: 24px; color: white;">Welcome <span id="customerNameATM"></span></h3></div>
-                                            <div class="col-12 content"><p style="font-size: 12px; color: white;">Welcome to your personal banking screen, from this screen you can make deposits, withdrawals and transfer money to other people, You can also check your recent activity using your statement.</p></div>
+                                        <div class="row">
+                                            <div class="col-12 title"><h3 style="font-size: 24px; color: white;"><span class="in-locale" data-locale="Welcome">Welcome</span> <span id="customerNameATM"></span></h3></div>
+                                            <div class="col-12 content"><p style="font-size: 12px; color: white;"><span class="in-locale" data-locale="WelcomeMessage">Welcome to your personal banking screen, from this screen you can make deposits, withdrawals and transfer money to other people, You can also check your recent activity using your statement.</span></p></div>
                                         </div>
                                     <div class="row" id="successRowATM" style="display:none;">
                                         <div class="col-12">
@@ -141,19 +142,19 @@
                                 <div class="row" style="position: relative; top: 15px;">
                                     <div class="col-6">
                                         <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: #00af17">
-                                            <div class="card-header"><i class="fad fa-fw fa-money-bill-wave"></i> Current Account Balance</div>
+                                            <div class="card-header"><i class="fad fa-fw fa-money-bill-wave"></i> <span class="in-locale" data-locale="AccountBalance">Current Account Balance</span></div>
                                             <div class="card-body">
                                               <h5 class="card-title" id="currentBalanceATM"></h5>
-                                              <p class="card-text">This is currently how much is avaliable to spend in your account.</p>
+                                              <p class="card-text in-locale" data-locale="AccountBalanceMessage">This is currently how much is avaliable to spend in your account.</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: #00c3ff">
-                                            <div class="card-header"><i class="fad fa-fw fa-coin"></i> Current Cash Balance</div>
+                                            <div class="card-header"><i class="fad fa-fw fa-coin"></i> <span class=" in-locale" data-locale="CurrentCashBalance">Current Cash Balance</span></div>
                                             <div class="card-body">
                                               <h5 class="card-title" id="currentCashBalanceATM"></h5>
-                                              <p class="card-text">This is currently how much cash you have on your person.</p>
+                                              <p class="card-text  in-locale" data-locale=" in-locale" data-locale="AccountNumber">This is currently how much cash you have on your person.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -162,16 +163,16 @@
                                 <div class="row" style="position: relative; top: 15px;">
                                     <div class="col-12">
                                         <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: white">
-                                            <div class="card-header"><i class="fad fa-fw fa-pencil-alt"></i> Quick Actions</div>
+                                            <div class="card-header"><i class="fad fa-fw fa-pencil-alt"></i><span class="QuickAction in-locale" data-locale="QuickAction" >Quick Actions</span></div>
                                             <div class="card-body">
                                                 <div class="container-fluid">
                                                     <div class="row m-1">
-                                                        <div class="col-6"><button class="btn btn-secondary btn-block" data-action="ATMwithdraw" data-amount="100">Withdrawal $100</button></div>
-                                                        <div class="col-6"><button class="btn btn-secondary btn-block" data-action="ATMwithdraw" data-amount="1000">Withdrawal $1000</button></div>
+                                                        <div class="col-6"><button class="btn btn-secondary btn-block in-locale" data-locale="Withdrawal100" data-action="ATMwithdraw" data-amount="100">Withdrawal $100</button></div>
+                                                        <div class="col-6"><button class="btn btn-secondary btn-block in-locale" data-locale="Withdrawal1000" data-action="ATMwithdraw" data-amount="1000">Withdrawal $1000</button></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-footer"><p class="card-text"><small>These are some quick actions that will enable a quicker and smoother process.</small></p></div>
+                                            <div class="card-footer"><p class="card-text"><small><span class="in-locale" data-locale="QuickActionsMessage">These are some quick actions that will enable a quicker and smoother process.</span></small></p></div>
                                           </div>
                                     </div>
                                 </div>
@@ -181,29 +182,29 @@
                         <div class="tab-pane fade" id="bankingWithdrawATM" role="tabpanel" aria-labelledby="bankingWithdrawATM-tab">
                             <div class="container-fluid p-2" style="position: relative; top: 54px;">
                                     <div class="row">
-                                        <div class="col-12 title"><h3 style="font-size: 24px; color: white;">Withdrawals</h3></div>
+                                        <div class="col-12 title"><h3 style="font-size: 24px; color: white;" class="in-locale" data-locale="Withdrawals">Withdrawals</h3></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12" style="font-size: 12px; color: white;">
+                                        <div class="col-12 in-locale" data-locale="WithdrawalsMessage" style="font-size: 12px; color: white;">
                                             Withdrawal of specific amounts can be completed on this screen, a Withdrawal is where money being taken out of your current account, if you are wanting to withdraw money from your savings, you must first transfer the funds to your current account.
                                         </div>
                                     </div>
                                     <div class="row" style="position: relative; top: 15px;">
                                         <div class="col-6">
                                             <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: #00af17">
-                                                <div class="card-header"><i class="fad fa-fw fa-money-bill-wave"></i> Current Account Balance</div>
+                                                <div class="card-header"><i class="fad fa-fw fa-money-bill-wave"></i> <span class="in-locale" data-locale="AccountBalance">Current Account Balance</span></div>
                                                 <div class="card-body">
                                                   <h5 class="card-title" id="currentBalanceATM1"></h5>
-                                                  <p class="card-text">This is currently how much is avaliable to spend in your account.</p>
+                                                  <p class="card-text in-locale" data-locale="AccountBalanceMessage">This is currently how much is avaliable to spend in your account.</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: #00c3ff">
-                                                <div class="card-header"><i class="fad fa-fw fa-coin"></i> Current Cash Balance</div>
+                                                <div class="card-header"><i class="fad fa-fw fa-coin"></i> <span class="in-locale" data-locale="CurrentCashBalance">Current Cash Balance</span></div>
                                                 <div class="card-body">
                                                   <h5 class="card-title" id="currentCashBalance1ATM"></h5>
-                                                  <p class="card-text">This is currently how much cash you have on your person.</p>
+                                                  <p class="card-text in-locale" data-locale="CurrenctCashMessage" >This is currently how much cash you have on your person.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -221,10 +222,10 @@
                                                                     </div>
                                                                 </div>
                                                                     <div class="row">
-                                                                        <div class="col-12 content">Please specify the amount you wish to Withdraw below.</div>
+                                                                        <div class="col-12 content in-locale" data-locale="WithdrawalsMessageAmountMessage">Please specify the amount you wish to Withdraw below.</div>
                                                                     </div>
                                                                 <div class="row mt-2">
-                                                                    <div class="col-3 my-auto"><label for="withdrawAmounATMt"><small>Amount to Withdraw</small></label></div>
+                                                                    <div class="col-3 my-auto"><label for="withdrawAmounATMt"><small><span class="in-locale" data-locale="WithdrawalsMessageAmount">Amount to Withdraw</span></small></label></div>
                                                                     <div class="col-9"><input type="number" placeholder="$" class="form-control" id="withdrawAmountATM" name="withdrawAmountATM"></div>
                                                                 </div>
                                                             </div>
@@ -234,7 +235,7 @@
                                         </div>
                                     </div>
                                     <div class="row" style="position: relative; top: 15px;">
-                                        <div class="col-12 text-center"><button class="btn" id="initiateWithdrawATM" style="background-color: #a7000b; color: white">Complete Withdrawal</button></div>
+                                        <div class="col-12 text-center"><button class="btn in-locale" data-locale="WithdrawalsMessageCompleted" id="initiateWithdrawATM" style="background-color: #a7000b; color: white">Complete Withdrawal</button></div>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +243,7 @@
                         <div class="tab-pane fade" id="bankingStatementATM" role="tabpanel" aria-labelledby="bankingStatementATM-tab">
                                 <div class="container-fluid p-2">
                                     <div class="row">
-                                        <div class="col-12 title"><h3>Current Account Statement</h3></div>
+                                        <div class="col-12 title"><h3 class="in-locale" data-locale="CurrentAccountStatement">Current Account Statement</h3></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
@@ -251,11 +252,11 @@
                                                 <table id="currentStatementATM" class="display" style="width:100%">
                                                     <thead>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>Description</th>
-                                                            <th class="text-center">Withdrawn</th>
-                                                            <th class="text-center">Deposit</th>
-                                                            <th class="text-center">New Balance</th>
+                                                            <th class="in-locale" data-locale="CurrentAccountTable_Date">Date</th>
+                                                            <th class="in-locale" data-locale="CurrentAccountTable_Description">Description</th>
+                                                            <th class="text-center in-locale" data-locale="CurrentAccountTable_Withdrawn">Withdrawn</th>
+                                                            <th class="text-center in-locale" data-locale="CurrentAccountTable_Deposit" >Deposit</th>
+                                                            <th class="text-center in-locale" data-locale="CurrentAccountTable_NewBalance">New Balance</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="currentStatementContentsATM">
@@ -275,9 +276,12 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="scripting/external/jquery/jquery.js"></script>
     <script src="scripting/jquery-ui.js"></script>
+    <script src="scripting/i18next-1.11.2.min.js"></script>
+    <script src="locales/translation.it.json"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/fc-3.2.5/kt-2.5.0/r-2.2.2/datatables.min.js"></script>
+   
     <script src="qb-atms.js"></script>
   </body>
 </html>

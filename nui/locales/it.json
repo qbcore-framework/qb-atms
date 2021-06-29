@@ -1,0 +1,48 @@
+
+{
+      "CardTitle" : "Card Title", 
+      "failed": "Fallito!",
+      "active": "Attiva",
+      "use" : "Usa",
+      "remove" : "Rimuovi",
+      "enter_pin" : "Inserisci il pin della tua carta di debito, per accedere al bancomat.",
+      "pin_error" : "Hai inserito un pin errato, riprova." ,
+
+
+
+      "cancelTransaction" : "Cancella Transazione",
+      "cancelButton" : "CANCELLA",
+      "acceptButton" : "ACCETTA",
+      "clearButton" : "PULISCI",
+      "authmessage1" : "Inserendo il pin e premendo il pulsante accetta si autorizza un addebito di $",
+      "authmessage2" : "dal tuo conto bancario direttamente al commerciante.",
+      "AccountHome" : "Home",
+      "Withdrawals" : "Prelievi",
+      "InfoAccount" : "Informazioni Account",
+      "AccountName" : "Nominativo",
+      "AccountNumber" : "Numero Account",
+      "Logoff" : "Esci",
+      "Welcome" : "Benvenuto",
+      "WelcomeMessage" : "Benvenuti nella schermata di personal banking, da questa schermata è possibile effettuare depositi, prelievi e trasferire denaro ad altre persone. È anche possibile controllare la vostra attività recente utilizzando la vostra dichiarazione.",
+      "AccountBalance" : "Saldo Corrente",
+      "AccountBalanceMessage" : "Questo attualmente è quanto disponibile da spendere nel tuo account.",
+      "CurrentCashBalance":"Contanti",
+      "CurrenctCashMessage":"Questo attualmente è quanto denaro hai sulla tua persona.",
+      "QuickAction":" Azioni Rapide",
+      "Withdrawal100":"Preleva $100",
+      "Withdrawal1000":"Preleva $1000",
+      "QuickActionsMessage":"Queste sono alcune azioni rapide che consentiranno un processo più rapido e fluido.",
+      "WithdrawalsMessage" : "Il prelievo di importi specifici può essere completato in questa schermata, un prelievo è il luogo in cui il denaro viene prelevato dal tuo conto corrente, se vuoi prelevare denaro dai tuoi risparmi, devi prima trasferire i fondi sul tuo conto corrente.",
+      "WithdrawalsMessageAmountMessage":"Si prega di specificare l'importo che si desidera prelevare di seguito.",
+      "WithdrawalsMessageAmount":"Importo da prelevare",
+      "WithdrawalsMessageCompleted" : "Prelievo completato",
+      "CurrentAccountStatement" : "Estratto conto corrente",
+      "CurrentAccountTable_Date":"Data",
+      "CurrentAccountTable_Description":"Descrizione",
+      "CurrentAccountTable_Withdrawn":"Ritirato",
+      "CurrentAccountTable_Deposit":"Deposito",
+      "CurrentAccountTable_NewBalance":"Nuovo Saldo"
+
+    
+  }
+  

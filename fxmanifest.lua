@@ -5,14 +5,14 @@ description 'QB-ATM'
 version '1.0.0'
 
 server_scripts {
-    'config.lua',
-    'locales/*.lua',
     'config/main.lua',
+    'locales/*.lua',
     'server/main.lua'
 }
 
 client_scripts {
     'config/main.lua',
+    'locales/*.lua',
     'client/main.lua',
     'client/nui.lua'
 }
@@ -27,7 +27,10 @@ files {
     'nui/scripting/jquery-ui.css',
     'nui/scripting/external/jquery/jquery.js',
     'nui/scripting/jquery-ui.js',
+    'nui/scripting/i18next-1.11.2.min.js',
     'nui/style.css',
     'nui/index.html',
-    'nui/qb-atms.js',
+    'nui/locales/it.json',
+    'nui/locales/en.json',
+    'nui/qb-atms.js'
 }

@@ -1,0 +1,44 @@
+{
+  "failed": "Fallito!",
+  "active": "Active",
+  "use": "Use",
+  "remove": "Remove",
+  "enter_pin": "Please enter your debit card pin, to access the ATM.",
+  "pin_error": "You have entered an incorrect pin, please try again." ,
+  "cancelTransaction" : "Cancel Transaction",
+  
+
+
+
+
+  "cancelButton" : "CANCEL",
+  "acceptButton" : "ACCEPT",
+  "clearButton" : "CLEAR",
+  "authmessage1" : "By entering your pin and pressing the accept button you are authorising a debit of $",
+  "authmessage2" : "from your bank account directly to the merchant.",
+  "AccountHome" : "Account Home",
+  "Withdrawals" : "Withdrawals",
+  "InfoAccount" : "Account Information",
+  "AccountNumber" : "Account Number",
+  "Logoff" : "Logoff",
+  "Welcome" : "Welcome",
+  "WelcomeMessage" : "Welcome to your personal banking screen, from this screen you can make deposits, withdrawals and transfer money to other people, You can also check your recent activity using your statement.",
+  "AccountBalance" : "Current Account Balance",
+  "AccountBalanceMessage" : "This is currently how much is avaliable to spend in your account.",
+  "CurrentCashBalance":"Current Cash Balance",
+  "CurrenctCashMessage":"This is currently how much cash you have on your person.",
+  "QuickAction":" Quick Actions",
+  "Withdrawal100":"Withdrawal $100",
+  "Withdrawal1000":"Withdrawal $1000",
+  "QuickActionsMessage":"These are some quick actions that will enable a quicker and smoother process.",
+  "WithdrawalsMessage" : "Withdrawal of specific amounts can be completed on this screen, a Withdrawal is where money being taken out of your current account, if you are wanting to withdraw money from your savings, you must first transfer the funds to your current account.",
+  "WithdrawalsMessageAmountMessage":"Please specify the amount you wish to Withdraw below.",
+  "WithdrawalsMessageAmount":"Amount to Withdraw",
+  "WithdrawalsMessageCompleted" : "Complete Withdrawal",
+  "CurrentAccountStatement" : "Current Account Statement",
+  "CurrentAccountTable_Date":"Date",
+  "CurrentAccountTable_Description":"Description",
+  "CurrentAccountTable_Withdrawn":"Withdrawn",
+  "CurrentAccountTable_Deposit":"Deposit",
+  "CurrentAccountTable_NewBalance":"NewBalance"
+}

@@ -1,4 +1,5 @@
 Config = {}
+Locales = Locales or {}
 
 Config.DailyLimit = 5000
 
