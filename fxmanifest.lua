@@ -4,6 +4,8 @@ game 'gta5'
 description 'QB-ATM'
 version '1.0.0'
 
+shared_script '@qb-core/import.lua'
+
 server_scripts {
     'config/main.lua',
     'locales/*.lua',
