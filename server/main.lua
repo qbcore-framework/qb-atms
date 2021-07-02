@@ -104,11 +104,7 @@ Citizen.CreateThread(function()
     while true do
         Wait(3600000)
         dailyWithdraws = {}
-<<<<<<< HEAD
         TriggerClientEvent('QBCore:Notify', -1, QBCore.Shared._U(Locales, 'server_main_CreateThread_notify'), "success")
-=======
-        TriggerClientEvent('QBCore:Notify', -1, "Daily Withdraw Limit Reset", "success")
->>>>>>> 4b0b1e25d2ed0e66fdaa4ae114a329f89b1e3865
     end
 end)
 
