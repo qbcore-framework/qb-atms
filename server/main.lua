@@ -1,5 +1,3 @@
-QBCore = nil
-TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
 local dailyWithdraws = {}
 
 QBCore.Functions.CreateCallback('qb-debitcard:server:requestCards', function(source, cb)

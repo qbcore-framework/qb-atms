@@ -10,7 +10,7 @@ Locales['en'] = {
     ["client_main_callback_removeCard_notify_2"]    = 'Failed to delete card.',
 
     -- server/main.lua
-    ['server_main_CreateThread_notify'] = "Daily limit resetted.",
+    ['server_main_CreateThread_notify'] = "Daily Withdraw Limit Reset",
     ['server_main_event_doAccountWithdraw_notify_1'] = "Withdraw $%s from credit card. Daily Withdraws: %s",
     ['server_main_event_doAccountWithdraw_notify_2'] = "You cant go into minus in ATM.",
     ['server_main_event_doAccountWithdraw_notify_3'] = "You have reached the daily limit."
