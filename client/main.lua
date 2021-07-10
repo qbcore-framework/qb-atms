@@ -1,4 +1,3 @@
-NearAtm = false
 playerData, playerLoaded = nil, false
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
