@@ -50,7 +50,8 @@ function tprint (t, s)
     end
 end 
 
-RegisterCommand('atm', function(source, args, rawCommand)
+RegisterServerEvent('qb-atms:server:openATM')
+AddEventHandler('qb-atms:server:openATM', function()
     local src = source
     local xPlayer = QBCore.Functions.GetPlayer(src)
     local visas = xPlayer.Functions.GetItemsByName('visa')

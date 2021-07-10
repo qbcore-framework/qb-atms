@@ -1,10 +1,15 @@
+NearAtm = false
+playerData, playerLoaded = nil, false
+
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function(data)
+    playerData = data
     playerLoaded = true
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload')
 AddEventHandler('QBCore:Client:OnPlayerUnload', function()
+    playerLoaded = false
     playerData = nil
 end)
 
@@ -85,23 +90,6 @@ RegisterNUICallback("loadBankingAccount", function(data, cb)
     print(data.cid, data.cardnumber)
 end)
 
-RegisterCommand('ts', function()
-    QBCore.Functions.TriggerCallback('qb-atms:server:loadBankAccount', function(banking)
-        if banking ~= false and type(banking) == "table" then
-            SetNuiFocus(true, true)
-            SendNUIMessage({
-                status = "loadBankAccount",
-                information = banking
-            })
-        else
-            SetNuiFocus(false, false)
-            SendNUIMessage({
-                status = "closeATM"
-            })
-        end
-    end, 'BJF20704', '6426696777343750')
-end)
-
 RegisterNetEvent('qb-atms:client:loadATM')
 AddEventHandler('qb-atms:client:loadATM', function(cards)
     if cards ~= nil and cards[1] ~= nil then
@@ -146,4 +134,36 @@ RegisterNUICallback("removeCard", function(data, cb)
             QBCore.Functions.Notify('Failed to delete card.', 'error')
         end
     end, data)
+end)
+
+local letSleep = true
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(1)
+        letSleep = true
+        if playerLoaded and QBCore ~= nil then 
+            local playerPed = PlayerPedId()
+            local playerCoords = GetEntityCoords(playerPed, true)
+            for k, v in pairs(Config.ATMModels) do
+                local hash = GetHashKey(v)
+                local nearATM = IsObjectNearPoint(hash, playerCoords.x, playerCoords.y, playerCoords.z, 1.2)
+                if nearATM then 
+                    local atm = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, 5.0, hash, false, false, false)
+                    local atmExists = DoesEntityExist(atm)
+                    if atmExists then 
+                        local atmCoords = GetEntityCoords(atm)
+                        QBCore.Functions.DrawText3D(atmCoords.x, atmCoords.y, atmCoords.z+1, "Press ~g~E~s~ to use the ATM.")
+                        letSleep = false
+                        if IsControlJustPressed(0, 38) then
+                            TriggerServerEvent("qb-atms:server:openATM")
+                        end
+                    end
+                end
+            end
+        end
+
+        if letSleep then
+            Citizen.Wait(100)
+        end
+    end
 end)
