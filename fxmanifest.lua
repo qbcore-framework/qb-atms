@@ -4,17 +4,16 @@ game 'gta5'
 description 'QB-ATM'
 version '1.0.0'
 
-shared_script '@qb-core/import.lua'
 
-server_scripts {
-    'config/main.lua',
+shared_scripts {
+    '@qb-core/import.lua',
     'locales/*.lua',
-    'server/main.lua'
+    'config/main.lua'
 }
 
+server_script 'server/main.lua'
+
 client_scripts {
-    'config/main.lua',
-    'locales/*.lua',
     'client/main.lua',
     'client/nui.lua'
 }
@@ -32,7 +31,8 @@ files {
     'nui/scripting/i18next-1.11.2.min.js',
     'nui/style.css',
     'nui/index.html',
-    'nui/locales/it.json',
+     'nui/locales/it.json',
     'nui/locales/en.json',
-    'nui/qb-atms.js'
+
 }
+

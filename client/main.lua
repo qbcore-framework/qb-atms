@@ -109,7 +109,7 @@ AddEventHandler('qb-atms:client:loadATM', function(cards)
         local playerCoords = GetEntityCoords(playerPed, true)
         for k, v in pairs(Config.ATMModels) do
             local hash = GetHashKey(v)
-            local atm = IsObjectNearPoint(hash, playerCoords.x, playerCoords.y, playerCoords.z, 1.2)
+            local atm = IsObjectNearPoint(hash, playerCoords.x, playerCoords.y, playerCoords.z, 1.5)
             if atm then 
                 local obj = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, 2.0, hash, false, false, false)
                 local atmCoords = GetEntityCoords(obj, false)
