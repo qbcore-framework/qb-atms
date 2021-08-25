@@ -3,8 +3,10 @@ Config = {}
 Config.DailyLimit = 5000
 
 Config.ATMModels = {
-    "prop_atm_01",
-    "prop_atm_02",
-    "prop_atm_03",
-    "prop_fleeca_atm"
+    -1126237515,
+    506770882,
+    -870868698,
+    150237004,
+    -239124254,
+    -1364697528
 }
