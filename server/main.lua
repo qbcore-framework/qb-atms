@@ -50,7 +50,15 @@ function tprint (t, s)
     end
 end 
 
-RegisterCommand('atm', function(source, args, rawCommand)
+QBCore.Functions.CreateUseableItem("mastercard", function(source, item)
+	openAtmMenu(source)
+end)
+
+QBCore.Functions.CreateUseableItem("visa", function(source, item)
+	openAtmMenu(source)
+end)
+
+function openATMMenu(source)
     local src = source
     local xPlayer = QBCore.Functions.GetPlayer(src)
     local visas = xPlayer.Functions.GetItemsByName('visa')
@@ -96,6 +104,10 @@ RegisterCommand('atm', function(source, args, rawCommand)
         end
     end
     TriggerClientEvent('qb-atms:client:loadATM', src, cards)
+end
+
+RegisterCommand('atm', function(source, args, rawCommand)
+    openATMMenu(source)
 end)
 
 Citizen.CreateThread(function()
