@@ -19,14 +19,11 @@ client_scripts {
 ui_page 'nui/index.html'
 
 files {
-    'nui/images/logo1.png',
-    'nui/images/logo.png',
-    'nui/images/visa.png',
-    'nui/images/mastercard.png',
-    'nui/scripting/jquery-ui.css',
-    'nui/scripting/external/jquery/jquery.js',
-    'nui/scripting/jquery-ui.js',
-    'nui/style.css',
-    'nui/index.html',
-    'nui/qb-atms.js'
+    'html/images/*.png',
+    'html/scripting/jquery-ui.css',
+    'html/scripting/external/jquery/jquery.js',
+    'html/scripting/jquery-ui.js',
+    'html/style.css',
+    'html/index.html',
+    'html/atms.js'
 }
