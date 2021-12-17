@@ -73,6 +73,31 @@ RegisterNetEvent('qb-atms:client:loadATM', function(cards)
     end
 end)
 
+RegisterNetEvent('qb-atms:client:targetATM', function()
+    QBCore.Functions.TriggerCallback('qb-atms:server:getDebitCards', function(cards)
+        if cards ~= nil and cards[1] ~= nil then
+
+            PlayATMAnimation('enter')
+            QBCore.Functions.Progressbar("accessing_atm", "Accessing ATM", 1500, false, true, {
+                disableMovement = false,
+                disableCarMovement = false,
+                disableMouse = false,
+                disableCombat = false,
+            }, {}, {}, {}, function() -- Done
+                SetNuiFocus(true, true)
+                SendNUIMessage({
+                    status = "openATMFrontScreen",
+                    cards = cards,
+                })
+            end, function()
+                QBCore.Functions.Notify("Failed!", "error")
+            end)
+
+        else
+            QBCore.Functions.Notify("Please visit a branch to order a card", "error")
+        end
+    end)
+end)
 -- Callbacks
 
 RegisterNUICallback("NUIFocusOff", function(data, cb)
@@ -130,3 +155,21 @@ RegisterNUICallback("removeCard", function(data, cb)
         end
     end, data)
 end)
+
+local atmMachines = {
+    `prop_atm_01`,
+    `prop_atm_02`,
+    `prop_atm_03`,
+    `prop_fleeca_atm`,
+}
+exports['qb-target']:AddTargetModel(atmMachines, {
+	options = {
+        {
+            type = 'client',
+            event = 'qb-atms:client:targetATM',
+            icon = 'fab fa-cc-visa',
+            label = 'Use ATM'
+        }
+	},
+	distance = 2.5,
+})

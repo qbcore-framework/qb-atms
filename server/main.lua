@@ -12,14 +12,10 @@ CreateThread(function()
 end)
 
 -- Command
-
-RegisterCommand('atm', function(source)
-    local src = source
-    local xPlayer = QBCore.Functions.GetPlayer(src)
-    local visas = xPlayer.Functions.GetItemsByName('visa')
-    local masters = xPlayer.Functions.GetItemsByName('mastercard')
+local getDebitCards = function(Player)
+    local visas = Player.Functions.GetItemsByName('visa')
+    local masters = Player.Functions.GetItemsByName('mastercard')
     local cards = {}
-
     if visas ~= nil and masters ~= nil then
         for _, v in pairs(visas) do
             local info = v.info
@@ -58,12 +54,19 @@ RegisterCommand('atm', function(source)
             cards[#cards+1] = v.info
         end
     end
+    return cards
+end
+
+RegisterCommand('atm', function(source)
+    local src = source
+    local xPlayer = QBCore.Functions.GetPlayer(src)
+    local cards = getDebitCards(xPlayer)
     TriggerClientEvent('qb-atms:client:loadATM', src, cards)
 end)
 
 -- Event
 
-RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
+RegisterServerEvent('qb-atms:server:doAccountWithdraw', function(data)
     if data ~= nil then
         local src = source
         local xPlayer = QBCore.Functions.GetPlayer(src)
@@ -178,4 +181,11 @@ QBCore.Functions.CreateCallback('qb-atms:server:loadBankAccount', function(sourc
         banking['cash'] = xPlayer.Functions.GetMoney('cash')
     end
     cb(banking)
+end)
+
+QBCore.Functions.CreateCallback('qb-atms:server:getDebitCards', function(source, cb, cid, cardnumber)
+    local src = source
+    local xPlayer = QBCore.Functions.GetPlayer(src)
+    local cards = getDebitCards(xPlayer)
+    cb(cards)
 end)
