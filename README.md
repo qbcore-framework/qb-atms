@@ -1,6 +1,10 @@
 # qb-atms
 Useable ATMs for QB-Core
 
+## Dependencies
+- [qb-core](https://github.com/qbcore-framework/qb-core)
+- [qb-target](https://github.com/BerkieBb/qb-target)
+
 # License
 
     QBCore Framework
