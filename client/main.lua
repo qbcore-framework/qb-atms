@@ -25,6 +25,21 @@ local function PlayATMAnimation(animation)
     end
 end
 
+local function DrawText3Ds(x, y, z, text)
+	SetTextScale(0.35, 0.35)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(255, 255, 255, 215)
+    SetTextEntry("STRING")
+    SetTextCentre(true)
+    AddTextComponentString(text)
+    SetDrawOrigin(x,y,z, 0)
+    DrawText(0.0, 0.0)
+    local factor = (string.len(text)) / 370
+    DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
+    ClearDrawOrigin()
+end
+
 -- Events
 
 RegisterNetEvent("hidemenu", function()
@@ -129,4 +144,34 @@ RegisterNUICallback("removeCard", function(data, cb)
             QBCore.Functions.Notify('Failed to delete card.', 'error')
         end
     end, data)
+end)
+
+-- Thread
+
+CreateThread(function()
+    while true do
+        local InRange = false
+        local PlayerPed = PlayerPedId()
+        local PlayerPos = GetEntityCoords(PlayerPed)
+        for i = 1, #Config.ATMModels do
+            local nearestatm = GetClosestObjectOfType(PlayerPos, 1.0, GetHashKey(Config.ATMModels[i]), false)
+            if DoesEntityExist(nearestatm) then
+                local atmLocation = GetEntityCoords(nearestatm)
+                local atmHead = GetEntityHeading(nearestatm)
+                local distance = GetDistanceBetweenCoords(PlayerPos.x, PlayerPos.y, PlayerPos.z, atmLocation.x, atmLocation.y, atmLocation.z, true)
+                if distance < 2.0 then
+                    InRange = true
+                    DrawText3Ds(atmLocation.x, atmLocation.y, atmLocation.z + 0.15, '~g~[E]~w~ - Open ATM')
+                    if IsControlJustPressed(0, 38) then -- E
+                        ExecuteCommand('atm')
+                    end
+                end
+            end
+        end
+
+        if not InRange then
+            Wait(1000)
+        end
+        Wait(5)
+    end
 end)
