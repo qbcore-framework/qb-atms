@@ -1,5 +1,9 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+local LastZone = nil
+local hasAlreadyEnteredMarker = false
+local CurrentAction = nil
+
 -- Functions
 
 local function PlayATMAnimation(animation)
@@ -24,6 +28,10 @@ local function PlayATMAnimation(animation)
         end
     end
 end
+
+AddEventHandler('qb-atms:hasExitedMarker', function(zone)
+	CurrentAction = nil
+end)
 
 -- Events
 
@@ -71,6 +79,57 @@ RegisterNetEvent('qb-atms:client:loadATM', function(cards)
     else
         QBCore.Functions.Notify("Please visit a branch to order a card", "error")
     end
+end)
+
+CreateThread(function()
+	while true do
+		local playerCoords, isAtATM, currentZone, letSleep = GetEntityCoords(PlayerPedId()), false, false, nil, true
+		local sleep = 2000
+		for k,v in pairs(Config.ATMcoords) do
+			local data = v
+			local distance = #(playerCoords - data.coords)
+
+			if distance < Config.DrawDistance then
+				sleep = 0
+				if distance < data.MarkerSize.x then
+					isAtATM = true, k
+				end
+			end
+		end
+		
+		if (isAtATM and not hasAlreadyEnteredMarker) or (isAtATM and LastZone ~= currentZone) then
+			hasAlreadyEnteredMarker, LastZone = true, currentZone
+			CurrentAction     = 'openAtm'
+			exports['qb-drawtext']:DrawText('[E] Access atm','left')
+		end
+		if not isAtATM and hasAlreadyEnteredMarker then
+			hasAlreadyEnteredMarker = false
+			sleep = 1000
+			TriggerEvent('qb-atms:hasExitedMarker', LastZone)
+			exports['qb-drawtext']:HideText()
+		end
+		Wait(sleep)
+	end
+end)
+
+CreateThread(function()
+	while true do
+
+		Wait(0)
+
+		if CurrentAction ~= nil then
+
+			if IsControlPressed(1, 38) then
+				Wait(500)
+
+				if CurrentAction == 'openAtm' then
+					TriggerServerEvent("qb-atms:server:openATMS")
+				end
+				
+
+			end
+		end
+	end
 end)
 
 -- Callbacks
