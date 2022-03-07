@@ -61,6 +61,55 @@ RegisterCommand('atm', function(source)
     TriggerClientEvent('qb-atms:client:loadATM', src, cards)
 end)
 
+RegisterServerEvent('qb-atms:server:openATMS')
+AddEventHandler('qb-atms:server:openATMS', function()
+    local src = source
+    local xPlayer = QBCore.Functions.GetPlayer(src)
+    local visas = xPlayer.Functions.GetItemsByName('visa')
+    local masters = xPlayer.Functions.GetItemsByName('mastercard')
+    local cards = {}
+
+    if visas ~= nil and masters ~= nil then
+        for _, v in pairs(visas) do
+            local info = v.info
+            local cardNum = info.cardNumber
+            local cardHolder = info.citizenid
+            local xCH = QBCore.Functions.GetPlayerByCitizenId(cardHolder)
+            if xCH ~= nil then
+                if xCH.PlayerData.charinfo.card ~= cardNum then
+                    info.cardActive = false
+                end
+            else
+                local player = MySQL.Sync.fetchScalar('SELECT charinfo FROM players WHERE citizenid = ?', { info.citizenid })
+                local xCH = player
+                if xCH.card ~= cardNum then
+                    info.cardActive = false
+                end
+            end
+            cards[#cards+1] = v.info
+        end
+        for _, v in pairs(masters) do
+            local info = v.info
+            local cardNum = info.cardNumber
+            local cardHolder = info.citizenid
+            local xCH = QBCore.Functions.GetPlayerByCitizenId(cardHolder)
+            if xCH ~= nil then
+                if xCH.PlayerData.charinfo.card ~= cardNum then
+                    info.cardActive = false
+                end
+            else
+                local player = MySQL.Sync.fetchScalar('SELECT charinfo FROM players WHERE citizenid = ?', { info.citizenid })
+                xCH = player
+                if xCH.card ~= cardNum then
+                    info.cardActive = false
+                end
+            end
+            cards[#cards+1] = v.info
+        end
+    end
+    TriggerClientEvent('qb-atms:client:loadATM', src, cards)
+end)
+
 -- Event
 
 RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
