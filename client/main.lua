@@ -76,6 +76,7 @@ end)
 -- Callbacks
 
 RegisterNUICallback("NUIFocusOff", function(data, cb)
+    TriggerServerEvent('qb-atms:server:unathorize')
     SetNuiFocus(false, false)
     SendNUIMessage({
         status = "closeATM"
@@ -128,5 +129,13 @@ RegisterNUICallback("removeCard", function(data, cb)
         else
             QBCore.Functions.Notify('Failed to delete card.', 'error')
         end
+    end, data)
+end)
+
+RegisterNUICallback('verifyPIN', function(data, cb)
+    QBCore.Functions.TriggerCallback('qb-atms:server:verifyPIN', function(isVerified)
+        SendNUIMessage({
+            status = isVerified and 'pinSuccess' or 'pinFailed'
+        })
     end, data)
 end)
