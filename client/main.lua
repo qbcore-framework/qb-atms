@@ -76,7 +76,7 @@ end)
 -- Callbacks
 
 RegisterNUICallback("NUIFocusOff", function(data, cb)
-    TriggerServerEvent('qb-atms:server:unathorize')
+    TriggerServerEvent('qb-atms:server:unauthorize')
     SetNuiFocus(false, false)
     SendNUIMessage({
         status = "closeATM"
