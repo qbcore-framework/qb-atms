@@ -7,21 +7,17 @@ local function PlayATMAnimation(animation)
     if animation == 'enter' then
         RequestAnimDict('amb@prop_human_atm@male@enter')
         while not HasAnimDictLoaded('amb@prop_human_atm@male@enter') do
-            Wait(1)
+            Wait(0)
         end
-        if HasAnimDictLoaded('amb@prop_human_atm@male@enter') then
-            TaskPlayAnim(playerPed, 'amb@prop_human_atm@male@enter', "enter", 1.0,-1.0, 3000, 1, 1, true, true, true)
-        end
+        TaskPlayAnim(playerPed, 'amb@prop_human_atm@male@enter', "enter", 1.0,-1.0, 3000, 1, 1, true, true, true)
     end
 
     if animation == 'exit' then
         RequestAnimDict('amb@prop_human_atm@male@exit')
         while not HasAnimDictLoaded('amb@prop_human_atm@male@exit') do
-            Wait(1)
+            Wait(0)
         end
-        if HasAnimDictLoaded('amb@prop_human_atm@male@exit') then
-            TaskPlayAnim(playerPed, 'amb@prop_human_atm@male@exit', "exit", 1.0,-1.0, 3000, 1, 1, true, true, true)
-        end
+        TaskPlayAnim(playerPed, 'amb@prop_human_atm@male@exit', "exit", 1.0,-1.0, 3000, 1, 1, true, true, true)
     end
 end
 
@@ -41,17 +37,32 @@ RegisterNetEvent('qb-atms:client:updateBankInformation', function(banking)
     })
 end)
 
+-- qb-target
+if Config.UseTarget then
+    CreateThread(function()
+        exports['qb-target']:AddTargetModel(Config.ATMModels, {
+            options = {
+                {
+                    event = 'qb-atms:server:enteratm',
+                    type = 'server',
+                    icon = "fas fa-credit-card",
+                    label = "Use ATM",
+                },
+            },
+            distance = 1.5,
+        })
+    end)
+end
+
 RegisterNetEvent('qb-atms:client:loadATM', function(cards)
-    if cards ~= nil and cards[1] ~= nil then
+    if cards and cards[1] then
         local playerPed = PlayerPedId()
         local playerCoords = GetEntityCoords(playerPed, true)
-        for k, v in pairs(Config.ATMModels) do
-            local hash = GetHashKey(v)
+        for _, v in pairs(Config.ATMModels) do
+            local hash = joaat(v)
             local atm = IsObjectNearPoint(hash, playerCoords.x, playerCoords.y, playerCoords.z, 1.5)
             if atm then
-                local obj = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, 2.0, hash, false, false, false)
-                local atmCoords = GetEntityCoords(obj, false)
-                    PlayATMAnimation('enter')
+                PlayATMAnimation('enter')
                 QBCore.Functions.Progressbar("accessing_atm", "Accessing ATM", 1500, false, true, {
                     disableMovement = false,
                     disableCarMovement = false,
@@ -84,27 +95,24 @@ RegisterNUICallback("NUIFocusOff", function(data, cb)
     PlayATMAnimation('exit')
 end)
 
-RegisterNUICallback("playATMAnim", function(data, cb)
+RegisterNUICallback("playATMAnim", function()
     local anim = 'amb@prop_human_atm@male@idle_a'
     RequestAnimDict(anim)
     while not HasAnimDictLoaded(anim) do
-        Wait(1)
+        Wait(0)
     end
-
-    if HasAnimDictLoaded(anim) then
-        TaskPlayAnim(PlayerPedId(), anim, "idle_a", 1.0,-1.0, 3000, 1, 1, true, true, true)
-    end
+    TaskPlayAnim(PlayerPedId(), anim, "idle_a", 1.0,-1.0, 3000, 1, 1, true, true, true)
 end)
 
-RegisterNUICallback("doATMWithdraw", function(data, cb)
-    if data ~= nil then
+RegisterNUICallback("doATMWithdraw", function(data)
+    if data then
         TriggerServerEvent('qb-atms:server:doAccountWithdraw', data)
     end
 end)
 
-RegisterNUICallback("loadBankingAccount", function(data, cb)
+RegisterNUICallback("loadBankingAccount", function(data)
     QBCore.Functions.TriggerCallback('qb-atms:server:loadBankAccount', function(banking)
-        if banking ~= false and type(banking) == "table" then
+        if banking and type(banking) == "table" then
             SendNUIMessage({
                 status = "loadBankAccount",
                 information = banking
@@ -118,7 +126,7 @@ RegisterNUICallback("loadBankingAccount", function(data, cb)
     end, data.cid, data.cardnumber)
 end)
 
-RegisterNUICallback("removeCard", function(data, cb)
+RegisterNUICallback("removeCard", function(data)
     QBCore.Functions.TriggerCallback('qb-debitcard:server:deleteCard', function(hasDeleted)
         if hasDeleted then
             SetNuiFocus(false, false)
