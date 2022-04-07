@@ -128,7 +128,7 @@ RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
     end
 end)
 
-RegisterNetEvent('qb-atms:server:unathorize', function() authorized[source] = nil end)
+RegisterNetEvent('qb-atms:server:unauthorize', function() authorized[source] = nil end)
 
 -- Callbacks
 
