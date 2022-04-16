@@ -1,6 +1,4 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local inATMZone = false
-local InATM = false
 
 -- Functions
 
