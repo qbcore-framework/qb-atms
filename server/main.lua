@@ -12,7 +12,7 @@ CreateThread(function()
 end)
 
 -- Command
-
+if not Config.UseTarget then
 RegisterCommand('atm', function(source)
     local src = source
     local xPlayer = QBCore.Functions.GetPlayer(src)
@@ -60,9 +60,10 @@ RegisterCommand('atm', function(source)
     end
     TriggerClientEvent('qb-atms:client:loadATM', src, cards)
 end)
+end
+-- Event
 
-RegisterServerEvent('qb-atms:server:openATMS')
-AddEventHandler('qb-atms:server:openATMS', function()
+RegisterNetEvent('qb-atms:server:enteratm',function ()
     local src = source
     local xPlayer = QBCore.Functions.GetPlayer(src)
     local visas = xPlayer.Functions.GetItemsByName('visa')
@@ -109,8 +110,6 @@ AddEventHandler('qb-atms:server:openATMS', function()
     end
     TriggerClientEvent('qb-atms:client:loadATM', src, cards)
 end)
-
--- Event
 
 RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
     if data ~= nil then

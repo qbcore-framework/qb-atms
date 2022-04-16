@@ -11,7 +11,14 @@ server_scripts {
     'server/main.lua'
 }
 
-client_script 'client/main.lua'
+client_script {
+	'@PolyZone/client.lua',
+    '@PolyZone/BoxZone.lua',
+    '@PolyZone/EntityZone.lua',
+    '@PolyZone/CircleZone.lua',
+    '@PolyZone/ComboZone.lua',
+	'client/main.lua'
+}
 
 ui_page 'nui/index.html'
 
@@ -29,3 +36,4 @@ files {
 }
 
 lua54 'yes'
+use_fxv2_oal 'yes'
