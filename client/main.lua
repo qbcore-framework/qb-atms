@@ -105,7 +105,6 @@ RegisterNetEvent('qb-atms:client:loadATM', function(cards)
                     disableMouse = false,
                     disableCombat = false,
                 }, {}, {}, {}, function() -- Done
-					InBank = true
                     SetNuiFocus(true, true)
                     SendNUIMessage({
                         status = "openATMFrontScreen",
