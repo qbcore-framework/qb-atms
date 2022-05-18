@@ -10,7 +10,7 @@ local Translations = {
         card_deleted = 'Card has been deleted',
         daily_withdraw_limit_reset = 'Daily Withdraw Limit Reset',
         withraw_from_credit_card = 'Withdraw $%{amount} from credit card. Daily Withdraws: %{withdraws}'
-    }
+    },
     action = {
         use_atm = 'Use ATM',
         accessing_atm = 'Accessing ATM...'
