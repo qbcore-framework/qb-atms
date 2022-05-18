@@ -7,7 +7,7 @@ CreateThread(function()
     while true do
         Wait(3600000)
         dailyWithdraws = {}
-        TriggerClientEvent('QBCore:Notify', -1, "Daily Withdraw Limit Reset", "success")
+        TriggerClientEvent('QBCore:Notify', -1, Lang:t('success.daily_withdraw_limit_reset'), "success")
     end
 end)
 
@@ -133,9 +133,9 @@ RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
                     xCH.Functions.RemoveMoney('bank', tonumber(data.amount))
                     xPlayer.Functions.AddMoney('cash', tonumber(data.amount))
                     dailyWithdraws[cardHolder] = dailyWithdraws[cardHolder] + tonumber(data.amount)
-                    TriggerClientEvent('QBCore:Notify', src, "Withdraw $" .. data.amount .. ' from credit card. Daily Withdraws: ' .. dailyWithdraws[cardHolder], "success")
+                    TriggerClientEvent('QBCore:Notify', src, Lang:t('success.withraw_from_credit_card', {amount = data.amount, dailywithdraws = dailyWithdraws[cardHolder]}), "success")
                 else
-                    TriggerClientEvent('QBCore:Notify', src, "Not Enough Money", "error")
+                    TriggerClientEvent('QBCore:Notify', src, Lang:t('error.not_enough_money'), "error")
                 end
 
                 banking['online'] = true
@@ -152,9 +152,9 @@ RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
                     xCH.money.bank = bankCount
                     MySQL.Async.execute('UPDATE players SET money = ? WHERE citizenid = ?', { xCH.money, cardHolder })
                     dailyWithdraws[cardHolder] = dailyWithdraws[cardHolder] + tonumber(data.amount)
-                    TriggerClientEvent('QBCore:Notify', src, "Withdraw $" .. data.amount .. ' from credit card. Daily Withdraws: ' .. dailyWithdraws[cardHolder], "success")
+                    TriggerClientEvent('QBCore:Notify', src, Lang:t('success.withraw_from_credit_card', {amount = data.amount, dailywithdraws = dailyWithdraws[cardHolder]}), "success")
                 else
-                    TriggerClientEvent('QBCore:Notify', src, "Not Enough Money", "error")
+                    TriggerClientEvent('QBCore:Notify', src, Lang:t('error.not_enough_money'), "error")
                 end
 
                 banking['online'] = false
@@ -165,7 +165,7 @@ RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
             end
             TriggerClientEvent('qb-atms:client:updateBankInformation', src, banking)
         else
-            TriggerClientEvent('QBCore:Notify', src, "You have reached the daily limit", "error")
+            TriggerClientEvent('QBCore:Notify', src, Lang:t('error.daily_limit_reached'), "error")
         end
     end
 end)

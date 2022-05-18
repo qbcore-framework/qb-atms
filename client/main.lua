@@ -46,7 +46,7 @@ if Config.UseTarget then
                     event = 'qb-atms:server:enteratm',
                     type = 'server',
                     icon = "fas fa-credit-card",
-                    label = "Use ATM",
+                    label = Lang:t('action.use_atm'),
                 },
             },
             distance = 1.5,
@@ -63,7 +63,7 @@ RegisterNetEvent('qb-atms:client:loadATM', function(cards)
             local atm = IsObjectNearPoint(hash, playerCoords.x, playerCoords.y, playerCoords.z, 1.5)
             if atm then
                 PlayATMAnimation('enter')
-                QBCore.Functions.Progressbar("accessing_atm", "Accessing ATM", 1500, false, true, {
+                QBCore.Functions.Progressbar("accessing_atm", Lang:t('action.accessing_atm'), 1500, false, true, {
                     disableMovement = false,
                     disableCarMovement = false,
                     disableMouse = false,
@@ -75,12 +75,12 @@ RegisterNetEvent('qb-atms:client:loadATM', function(cards)
                         cards = cards,
                     })
                 end, function()
-                    QBCore.Functions.Notify("Failed!", "error")
+                    QBCore.Functions.Notify(Lang:t('error.failed', "error"))
                 end)
             end
         end
     else
-        QBCore.Functions.Notify("Please visit a branch to order a card", "error")
+        QBCore.Functions.Notify(Lang:t('error.visit_branch'), "error")
     end
 end)
 
@@ -132,9 +132,9 @@ RegisterNUICallback("removeCard", function(data)
             SendNUIMessage({
                 status = "closeATM"
             })
-            QBCore.Functions.Notify('Card has been deleted.', 'success')
+            QBCore.Functions.Notify(Lang:t('success.card_deleted'), 'success')
         else
-            QBCore.Functions.Notify('Failed to delete card.', 'error')
+            QBCore.Functions.Notify(Lang:t('error.failed_delete_card'), 'error')
         end
     end, data)
 end)
