@@ -75,7 +75,7 @@ RegisterNetEvent('qb-atms:client:loadATM', function(cards)
                         cards = cards,
                     })
                 end, function()
-                    QBCore.Functions.Notify(Lang:t('error.failed', "error"))
+                    QBCore.Functions.Notify(Lang:t('error.failed'), "error")
                 end)
             end
         end
