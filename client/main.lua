@@ -21,9 +21,26 @@ local function PlayATMAnimation(animation)
     end
 end
 
+local listen = false
+local function Listen4Control()
+    CreateThread(function()
+        listen = true
+        while listen do
+            if IsControlJustPressed(0, 38) then -- E
+                    exports["qb-core"]:KeyPressed()
+                    TriggerServerEvent("qb-atms:server:enteratm")
+                listen = false
+                break
+            end
+            Wait(1)
+        end
+    end)
+end
+
 -- Events
 
 RegisterNetEvent("hidemenu", function()
+	InATM = false
     SetNuiFocus(false, false)
     SendNUIMessage({
         status = "closeATM"
@@ -37,22 +54,41 @@ RegisterNetEvent('qb-atms:client:updateBankInformation', function(banking)
     })
 end)
 
--- qb-target
-if Config.UseTarget then
-    CreateThread(function()
-        exports['qb-target']:AddTargetModel(Config.ATMModels, {
-            options = {
-                {
-                    event = 'qb-atms:server:enteratm',
-                    type = 'server',
-                    icon = "fas fa-credit-card",
-                    label = "Use ATM",
-                },
-            },
-            distance = 1.5,
-        })
-    end)
-end
+local NewZones = {}
+CreateThread(function()
+    if not Config.UseTarget then
+        for k, v in pairs(Config.ATMcoords) do
+            NewZones[#NewZones+1] = CircleZone:Create(vector3(v.x, v.y, v.z), 1.5, {
+                useZ = true,
+                debugPoly = false,
+                name = k,
+            })
+        end
+
+        local combo = ComboZone:Create(NewZones, {name = "RandomZOneName", debugPoly = false})
+        combo:onPlayerInOut(function(isPointInside, point, zone)
+            if isPointInside then
+                exports["qb-core"]:DrawText("[E] Use ATM")
+                Listen4Control()
+            else
+                exports["qb-core"]:HideText()
+                listen = false
+            end
+        end)
+	else
+		exports['qb-target']:AddTargetModel(Config.ATMModels, {
+				options = {
+					{
+						event = 'qb-atms:server:enteratm',
+						type = 'server',
+						icon = "fas fa-credit-card",
+						label = "Use ATM",
+					},
+				},
+				distance = 1.5,
+		})
+	end
+end)
 
 RegisterNetEvent('qb-atms:client:loadATM', function(cards)
     if cards and cards[1] then
@@ -87,6 +123,7 @@ end)
 -- Callbacks
 
 RegisterNUICallback("NUIFocusOff", function()
+	InATM = false
     SetNuiFocus(false, false)
     SendNUIMessage({
         status = "closeATM"
