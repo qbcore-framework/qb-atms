@@ -1,4 +1,5 @@
 local dailyWithdraws = {}
+local authorized = {}
 local QBCore = exports['qb-core']:GetCoreObject()
 
 -- Thread
@@ -37,6 +38,7 @@ RegisterCommand('atm', function(source)
                     info.cardActive = false
                 end
             end
+            v.info.cardPin = nil
             cards[#cards+1] = v.info
         end
         for _, v in pairs(masters) do
@@ -55,6 +57,7 @@ RegisterCommand('atm', function(source)
                     info.cardActive = false
                 end
             end
+            v.info.cardPin = nil
             cards[#cards+1] = v.info
         end
     end
@@ -112,11 +115,14 @@ RegisterNetEvent('qb-atms:server:enteratm',function ()
 end)
 
 RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
+    if not authorized[source] or authorized[source] ~= data.cardnumber then return end
+
     if data ~= nil then
         local src = source
         local xPlayer = QBCore.Functions.GetPlayer(src)
         local cardHolder = data.cid
         local xCH = QBCore.Functions.GetPlayerByCitizenId(cardHolder)
+        data.amount = math.abs(data.amount)
 
         if not dailyWithdraws[cardHolder] then
             dailyWithdraws[cardHolder] = 0
@@ -170,6 +176,8 @@ RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
     end
 end)
 
+RegisterNetEvent('qb-atms:server:unauthorize', function() authorized[source] = nil end)
+
 -- Callbacks
 
 QBCore.Functions.CreateCallback('qb-debitcard:server:requestCards', function(source, cb)
@@ -205,6 +213,8 @@ QBCore.Functions.CreateCallback('qb-debitcard:server:deleteCard', function(sourc
 end)
 
 QBCore.Functions.CreateCallback('qb-atms:server:loadBankAccount', function(source, cb, cid, cardnumber)
+    if not authorized[source] or authorized[source] ~= cardnumber then cb(false) return end
+
     local src = source
     local xPlayer = QBCore.Functions.GetPlayer(src)
     local cardHolder = cid
@@ -226,4 +236,23 @@ QBCore.Functions.CreateCallback('qb-atms:server:loadBankAccount', function(sourc
         banking['cash'] = xPlayer.Functions.GetMoney('cash')
     end
     cb(banking)
+end)
+
+QBCore.Functions.CreateCallback('qb-atms:server:verifyPIN', function(source, cb, data)
+    local src = source
+    local xPlayer = QBCore.Functions.GetPlayer(src)
+    local visas = xPlayer.Functions.GetItemsByName('visa')
+    local masters = xPlayer.Functions.GetItemsByName('mastercard')
+    local returnValue = false
+
+    for i,v in pairs(visas) do
+        returnValue = returnValue and true or (v.info.cardNumber == data.cardNumber and v.info.cardPin == data.cardPin)
+    end
+
+    for i,v in pairs(masters) do
+        returnValue = returnValue and true or (v.info.cardNumber == data.cardNumber and v.info.cardPin == data.cardPin)
+    end
+
+    if returnValue then authorized[src] = data.cardNumber end
+    cb(returnValue)
 end)
