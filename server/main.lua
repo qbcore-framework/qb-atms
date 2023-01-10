@@ -129,15 +129,18 @@ RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
             if xCH ~= nil then
                 local bank = xCH.Functions.GetMoney('bank')
                 local bankCount = xCH.Functions.GetMoney('bank') - tonumber(data.amount)
-                if bankCount > 0 then
-                    xCH.Functions.RemoveMoney('bank', tonumber(data.amount))
-                    xPlayer.Functions.AddMoney('cash', tonumber(data.amount))
-                    dailyWithdraws[cardHolder] = dailyWithdraws[cardHolder] + tonumber(data.amount)
-                    TriggerClientEvent('QBCore:Notify', src, "Withdraw $" .. data.amount .. ' from credit card. Daily Withdraws: ' .. dailyWithdraws[cardHolder], "success")
-                else
-                    TriggerClientEvent('QBCore:Notify', src, "Not Enough Money", "error")
-                end
-
+                if tonumber(data.amount) < 0 then 
+                    TriggerClientEvent('QBCore:Notify', src, "Amount should be greater than 0!", "error")
+                else     
+                    if bankCount > 0 then
+                        xCH.Functions.RemoveMoney('bank', tonumber(data.amount))
+                        xPlayer.Functions.AddMoney('cash', tonumber(data.amount))
+                        dailyWithdraws[cardHolder] = dailyWithdraws[cardHolder] + tonumber(data.amount)
+                        TriggerClientEvent('QBCore:Notify', src, "Withdraw $" .. data.amount .. ' from credit card. Daily Withdraws: ' .. dailyWithdraws[cardHolder], "success")
+                    else
+                        TriggerClientEvent('QBCore:Notify', src, "Not Enough Money", "error")
+                    end
+                end    
                 banking['online'] = true
                 banking['name'] = xCH.PlayerData.charinfo.firstname .. ' ' .. xCH.PlayerData.charinfo.lastname
                 banking['bankbalance'] = xCH.Functions.GetMoney('bank')
@@ -147,16 +150,19 @@ RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
                 local player = MySQL.Sync.fetchAll('SELECT * FROM players WHERE citizenid = ?', { cardHolder })
                 local xCH = json.decode(player[1])
                 local bankCount = tonumber(xCH.money.bank) - tonumber(data.amount)
-                if bankCount > 0  then
-                    xPlayer.Functions.AddMoney('cash', tonumber(data.amount))
-                    xCH.money.bank = bankCount
-                    MySQL.Async.execute('UPDATE players SET money = ? WHERE citizenid = ?', { xCH.money, cardHolder })
-                    dailyWithdraws[cardHolder] = dailyWithdraws[cardHolder] + tonumber(data.amount)
-                    TriggerClientEvent('QBCore:Notify', src, "Withdraw $" .. data.amount .. ' from credit card. Daily Withdraws: ' .. dailyWithdraws[cardHolder], "success")
+                if tonumber(data.amount) < 0 then 
+                    TriggerClientEvent('QBCore:Notify', src, "Amount should be greater than 0!", "error")
                 else
-                    TriggerClientEvent('QBCore:Notify', src, "Not Enough Money", "error")
-                end
-
+                    if bankCount > 0  then
+                        xPlayer.Functions.AddMoney('cash', tonumber(data.amount))
+                        xCH.money.bank = bankCount
+                        MySQL.Async.execute('UPDATE players SET money = ? WHERE citizenid = ?', { xCH.money, cardHolder })
+                        dailyWithdraws[cardHolder] = dailyWithdraws[cardHolder] + tonumber(data.amount)
+                        TriggerClientEvent('QBCore:Notify', src, "Withdraw $" .. data.amount .. ' from credit card. Daily Withdraws: ' .. dailyWithdraws[cardHolder], "success")
+                    else
+                        TriggerClientEvent('QBCore:Notify', src, "Not Enough Money", "error")
+                    end
+                end    
                 banking['online'] = false
                 banking['name'] = xCH.charinfo.firstname .. ' ' .. xCH.charinfo.lastname
                 banking['bankbalance'] = xCH.money.bank
