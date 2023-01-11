@@ -118,6 +118,10 @@ RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
         local cardHolder = data.cid
         local xCH = QBCore.Functions.GetPlayerByCitizenId(cardHolder)
 
+        if tonumber(data.amount) <= 0 then 
+            return TriggerClientEvent('QBCore:Notify', src, "Amount should be greater than 0", "error")
+        end   
+
         if not dailyWithdraws[cardHolder] then
             dailyWithdraws[cardHolder] = 0
         end
