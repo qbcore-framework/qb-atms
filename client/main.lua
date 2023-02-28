@@ -23,12 +23,13 @@ end
 
 local listen = false
 local function Listen4Control()
+    listen = true
+
     CreateThread(function()
-        listen = true
         while listen do
             if IsControlJustPressed(0, 38) then -- E
-                    exports["qb-core"]:KeyPressed()
-                    TriggerServerEvent("qb-atms:server:enteratm")
+                exports["qb-core"]:KeyPressed()
+                TriggerServerEvent("qb-atms:server:enteratm")
                 listen = false
                 break
             end
