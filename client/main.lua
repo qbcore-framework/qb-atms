@@ -124,7 +124,7 @@ end)
 -- Callbacks
 
 RegisterNUICallback("NUIFocusOff", function()
-	InATM = false
+    InATM = false
     SetNuiFocus(false, false)
     SendNUIMessage({
         status = "closeATM"
