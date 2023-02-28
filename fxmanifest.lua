@@ -12,7 +12,7 @@ server_scripts {
 }
 
 client_script {
-	'@PolyZone/client.lua',
+    '@PolyZone/client.lua',
     '@PolyZone/BoxZone.lua',
     '@PolyZone/EntityZone.lua',
     '@PolyZone/CircleZone.lua',
