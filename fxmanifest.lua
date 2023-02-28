@@ -15,7 +15,7 @@ client_script {
     '@PolyZone/client.lua',
     '@PolyZone/CircleZone.lua',
     '@PolyZone/ComboZone.lua',
-	'client/main.lua'
+    'client/main.lua'
 }
 
 ui_page 'nui/index.html'
