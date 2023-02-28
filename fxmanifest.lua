@@ -1,8 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'QB-ATM'
-version '1.0.0'
+description 'QB-ATMS'
+version '1.2.3'
 
 shared_script 'config.lua'
 

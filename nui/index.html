@@ -129,7 +129,7 @@
                 <div class="tab-content p-2 shadow-lg" id="v-pills-tabContent-atm" style="max-height:780px; min-height:780px;">
                         <div class="tab-pane fade active show" id="bankingHomeATM" role="tabpanel" aria-labelledby="enteringPinTab">
                                 <div class="container-fluid p-2" style="position: relative; top: 54px;">
-                                        <<div class="row">
+                                        <div class="row">
                                             <div class="col-12 title"><h3 style="font-size: 24px; color: white;">Welcome <span id="customerNameATM"></span></h3></div>
                                             <div class="col-12 content"><p style="font-size: 12px; color: white;">Welcome to your personal banking screen, from this screen you can make deposits, withdrawals and transfer money to other people, You can also check your recent activity using your statement.</p></div>
                                         </div>
@@ -166,8 +166,12 @@
                                             <div class="card-body">
                                                 <div class="container-fluid">
                                                     <div class="row m-1">
-                                                        <div class="col-6"><button class="btn btn-secondary2 btn-block" data-action="ATMwithdraw" data-amount="100">Withdrawal $100</button></div>
-                                                        <div class="col-6"><button class="btn btn-secondary2 btn-block" data-action="ATMwithdraw" data-amount="1000">Withdrawal $1000</button></div>
+                                                        <div class="col-6">
+                                                            <button class="btn btn-secondary2 btn-block" data-withdrawal="preset" data-amount="100">Withdrawal $100</button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <button class="btn btn-secondary2 btn-block" data-withdrawal="preset" data-amount="1000">Withdrawal $1000</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,18 +217,16 @@
                                                 <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: white">
                                                         <div class="card-body">
                                                             <div class="container-fluid">
-                                                                <div class="row" id="withdrawATMError" style="display:none;">
-                                                                    <div class="col-12">
-                                                                        <div class="alert alert-danger" role="alert" id="withdrawATMErrorMsg">
-                                                                            
-                                                                        </div>
+                                                                <div class="row">
+                                                                    <div class="alert alert-danger d-none" id="withdrawATMErrorMsg">
+                                                                        An unexpected error has occured, please try again later.
                                                                     </div>
                                                                 </div>
-                                                                    <div class="row">
-                                                                        <div class="col-12 content">Please specify the amount you wish to Withdraw below.</div>
-                                                                    </div>
+                                                                <div class="row">
+                                                                    <div class="col-12 content">Please specify the amount you wish to Withdraw below.</div>
+                                                                </div>
                                                                 <div class="row mt-2">
-                                                                    <div class="col-3 my-auto"><label for="withdrawAmounATMt"><small>Amount to Withdraw</small></label></div>
+                                                                    <div class="col-3 my-auto"><label for="withdrawAmountATM"><small>Amount to Withdraw</small></label></div>
                                                                     <div class="col-9"><input type="number" placeholder="$" class="form-control" id="withdrawAmountATM" name="withdrawAmountATM"></div>
                                                                 </div>
                                                             </div>
@@ -234,7 +236,9 @@
                                         </div>
                                     </div>
                                     <div class="row" style="position: relative; top: 15px;">
-                                        <div class="col-12 text-center"><button class="btn btn-secondary2" id="initiateWithdrawATM">Complete Withdrawal</button></div>
+                                        <div class="col-12 text-center">
+                                            <button class="btn btn-secondary2" data-withdrawal="manual">Complete Withdrawal</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
