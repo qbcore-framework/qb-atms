@@ -76,19 +76,19 @@ CreateThread(function()
                 listen = false
             end
         end)
-	else
-		exports['qb-target']:AddTargetModel(Config.ATMModels, {
-				options = {
-					{
-						event = 'qb-atms:server:enteratm',
-						type = 'server',
-						icon = "fas fa-credit-card",
-						label = "Use ATM",
-					},
-				},
-				distance = 1.5,
-		})
-	end
+    else
+        exports['qb-target']:AddTargetModel(Config.ATMModels, {
+            options = {
+                {
+                    event = 'qb-atms:server:enteratm',
+                    type = 'server',
+                    icon = "fas fa-credit-card",
+                    label = "Use ATM",
+                },
+            },
+            distance = 1.5,
+        })
+    end
 end)
 
 RegisterNetEvent('qb-atms:client:loadATM', function(cards)
