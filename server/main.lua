@@ -214,6 +214,31 @@ QBCore.Functions.CreateCallback('qb-atms:server:loadBankAccount', function(sourc
     local cardHolder = cid
     local xCH = QBCore.Functions.GetPlayerByCitizenId(cardHolder)
     local banking = {}
+
+    -- Checks if the cardnumber is locked or not
+    local cardLocked = MySQL.Sync.fetchScalar("SELECT cardLocked FROM bank_cards WHERE citizenid = ? AND cardnumber = ?", { cardHolder, cardnumber })
+    if cardLocked ~= 0 then
+        TriggerClientEvent("QBCore:Notify", src, "You can't use a locked card! The card has been swallowed into the machine", "error")
+
+        -- Visa card removal
+        local foundVisa = xPlayer.Functions.GetCardSlot( cardnumber, "visa" )
+        if foundVisa then
+            exports["qb-inventory"]:RemoveItem(src, "visa", 1, foundVisa)
+            MySQL.Async.execute("DELETE FROM bank_cards WHERE citizenid = ? AND cardNumber = ? AND cardType = ?", { cid, cardnumber, "visa" })
+            cb(false)
+            return
+        end
+
+        -- Visa card removal
+        local foundMC = xPlayer.Functions.GetCardSlot( cardnumber, "mastercard" )
+        if foundMC then
+            exports["qb-inventory"]:RemoveItem(src, "mastercard", 1, foundMC)
+            MySQL.Async.execute("DELETE FROM bank_cards WHERE citizenid = ? AND cardNumber = ? AND cardType = ?", { cid, cardnumber, "mastercard" })
+            cb(false)
+            return
+        end
+    end
+
     if xCH ~= nil then
         banking['online'] = true
         banking['name'] = xCH.PlayerData.charinfo.firstname .. ' ' .. xCH.PlayerData.charinfo.lastname
