@@ -65,16 +65,16 @@ CreateThread(function()
             },
             distance = 1.5,
         })
-	else
+    else
         local atmPoly = {}
-		for k, v in pairs(Config.ATMLocations) do
-            atmPoly[#atmPoly+1] = CircleZone:Create(vector3(v.x, v.y, v.z+1), 0.8, {
+        for k, v in pairs(Config.ATMLocations) do
+            atmPoly[#atmPoly + 1] = CircleZone:Create(vector3(v.x, v.y, v.z + 1), 0.8, {
                 useZ = true,
                 debugPoly = false,
                 name = k,
             })
         end
-        local atmCombo = ComboZone:Create(atmPoly, {name = "atm_", debugPoly = false})
+        local atmCombo = ComboZone:Create(atmPoly, { name = "atm_", debugPoly = false })
         atmCombo:onPlayerInOut(function(isPointInside)
             if isPointInside then
                 exports["qb-core"]:DrawText("[E] Use ATM")
@@ -84,7 +84,7 @@ CreateThread(function()
                 AtmControlPressed = false
             end
         end)
-	end
+    end
 end)
 
 RegisterNetEvent('qb-atms:client:loadATM', function(cards)
