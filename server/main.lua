@@ -229,7 +229,7 @@ QBCore.Functions.CreateCallback('qb-atms:server:loadBankAccount', function(sourc
             return
         end
 
-        -- Visa card removal
+        -- Master card removal
         local foundMC = xPlayer.Functions.GetCardSlot( cardnumber, "mastercard" )
         if foundMC then
             exports["qb-inventory"]:RemoveItem(src, "mastercard", 1, foundMC)
