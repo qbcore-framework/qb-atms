@@ -17,7 +17,6 @@ ui_page 'nui/index.html'
 
 files {
     'nui/images/logo1.png',
-    'nui/images/logo.png',
     'nui/images/visa.png',
     'nui/images/mastercard.png',
     'nui/scripting/jquery-ui.css',
