@@ -12,7 +12,6 @@ CreateThread(function()
 end)
 
 -- Command
-if not Config.UseTarget then
 RegisterCommand('atm', function(source)
     local src = source
     local xPlayer = QBCore.Functions.GetPlayer(src)
@@ -60,7 +59,7 @@ RegisterCommand('atm', function(source)
     end
     TriggerClientEvent('qb-atms:client:loadATM', src, cards)
 end)
-end
+
 -- Event
 
 RegisterNetEvent('qb-atms:server:enteratm',function ()

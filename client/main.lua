@@ -37,9 +37,23 @@ RegisterNetEvent('qb-atms:client:updateBankInformation', function(banking)
     })
 end)
 
--- qb-target
-if Config.UseTarget then
+-- threads
+local AtmControlPressed = false
+local function AtmControl()
     CreateThread(function()
+        AtmControlPressed = true
+        while AtmControlPressed do
+            if IsControlJustPressed(0, 38) then
+                exports["qb-core"]:KeyPressed()
+                TriggerServerEvent("qb-atms:server:enteratm")
+            end
+            Wait(1)
+        end
+    end)
+end
+
+CreateThread(function()
+    if Config.UseTarget then
         exports['qb-target']:AddTargetModel(Config.ATMModels, {
             options = {
                 {
@@ -51,8 +65,27 @@ if Config.UseTarget then
             },
             distance = 1.5,
         })
-    end)
-end
+	else
+        local atmPoly = {}
+		for k, v in pairs(Config.ATMLocations) do
+            atmPoly[#atmPoly+1] = CircleZone:Create(vector3(v.x, v.y, v.z+1), 0.8, {
+                useZ = true,
+                debugPoly = false,
+                name = k,
+            })
+        end
+        local atmCombo = ComboZone:Create(atmPoly, {name = "atm_", debugPoly = false})
+        atmCombo:onPlayerInOut(function(isPointInside)
+            if isPointInside then
+                exports["qb-core"]:DrawText("[E] Use ATM")
+                AtmControl()
+            else
+                exports["qb-core"]:HideText()
+                AtmControlPressed = false
+            end
+        end)
+	end
+end)
 
 RegisterNetEvent('qb-atms:client:loadATM', function(cards)
     if cards and cards[1] then

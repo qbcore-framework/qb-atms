@@ -11,7 +11,12 @@ server_scripts {
     'server/main.lua'
 }
 
-client_script 'client/main.lua'
+client_scripts {
+	'@PolyZone/client.lua',
+    '@PolyZone/CircleZone.lua',
+    '@PolyZone/ComboZone.lua',
+	'client/main.lua'
+}
 
 ui_page 'nui/index.html'
 
