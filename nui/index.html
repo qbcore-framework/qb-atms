@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link href="scripting/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
  
     <title>QBCore Banking</title>
   </head>
@@ -129,8 +130,8 @@
                 <div class="tab-content p-2 shadow-lg" id="v-pills-tabContent-atm" style="max-height:780px; min-height:780px;">
                         <div class="tab-pane fade active show" id="bankingHomeATM" role="tabpanel" aria-labelledby="enteringPinTab">
                                 <div class="container-fluid p-2" style="position: relative; top: 54px;">
-                                        <div class="row">
-                                            <div class="col-12 title"><h3 style="font-size: 24px; color: white;">Welcome <span id="customerNameATM"></span></h3></div>
+                                        <div class="row title">
+                                            <div class="col-12 title"><h3 style="font-size: 35px; color: white;">Welcome <span id="customerNameATM"></span></h3></div>
                                             <div class="col-12 content"><p style="font-size: 12px; color: white;">Welcome to your personal banking screen, from this screen you can make deposits, withdrawals and transfer money to other people, You can also check your recent activity using your statement.</p></div>
                                         </div>
                                     <div class="row" id="successRowATM" style="display:none;">
@@ -141,7 +142,7 @@
                                 <div class="row" style="position: relative; top: 15px;">
                                     <div class="col-6">
                                         <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: #fff">
-                                            <div class="card-header"><i class="fad fa-fw fa-money-bill-wave"></i> Current Account Balance</div>
+                                            <div class="card-header"><i class="fa-solid fa-fw fa-vault"></i> Current Account Balance</div>
                                             <div class="card-body">
                                               <h5 class="card-title" id="currentBalanceATM" style=" color: #28a745"></h5>
                                               <p class="card-text">This is currently how much is avaliable to spend in your account.</p>
@@ -150,7 +151,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: #fff">
-                                            <div class="card-header"><i class="fad fa-fw fa-coin"></i> Current Cash Balance</div>
+                                            <div class="card-header"><i class="fa-solid fa-fw fa-wallet"></i> Current Cash Balance</div>
                                             <div class="card-body">
                                               <h5 class="card-title" id="currentCashBalanceATM" style=" color: #28a745"></h5>
                                               <p class="card-text">This is currently how much cash you have on your person.</p>
@@ -162,7 +163,7 @@
                                 <div class="row" style="position: relative; top: 15px;">
                                     <div class="col-12">
                                         <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: white">
-                                            <div class="card-header"><i class="fad fa-fw fa-pencil-alt"></i> Quick Actions</div>
+                                            <div class="card-header"><i class="fa-solid fa-fw fa-pencil"></i> Quick Actions</div>
                                             <div class="card-body">
                                                 <div class="container-fluid">
                                                     <div class="row m-1">
@@ -195,7 +196,7 @@
                                     <div class="row" style="position: relative; top: 15px;">
                                         <div class="col-6">
                                             <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: #fff">
-                                                <div class="card-header"><i class="fad fa-fw fa-money-bill-wave"></i> Current Account Balance</div>
+                                                <div class="card-header"><i class="fa-solid fa-fw fa-vault"></i> Current Account Balance</div>
                                                 <div class="card-body">
                                                   <h5 class="card-title" id="currentBalanceATM1" style=" color: #28a745"></h5>
                                                   <p class="card-text">This is currently how much is avaliable to spend in your account.</p>
@@ -204,7 +205,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="card mb-3" style="background:rgba(51, 51, 51, 0.8); color: #fff">
-                                                <div class="card-header"><i class="fad fa-fw fa-coin"></i> Current Cash Balance</div>
+                                                <div class="card-header"><i class="fa-solid fa-fw fa-wallet"></i> Current Cash Balance</div>
                                                 <div class="card-body">
                                                   <h5 class="card-title" id="currentCashBalance1ATM" style=" color: #28a745"></h5>
                                                   <p class="card-text">This is currently how much cash you have on your person.</p>

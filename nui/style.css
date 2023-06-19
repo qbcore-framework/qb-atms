@@ -22,13 +22,13 @@ body {
 #cardsDisplay::-webkit-scrollbar
 {
     width: 10px;
-    background-color: rgba(0, 0, 0, 0)
+    background-color: rgba(0, 0, 0, 0);
 }
 
 #cardsDisplay::-webkit-scrollbar-thumb
  {
     background-color: rgb(31, 31, 31);
-    border: 2px solid rgb(31, 31, 31)
+    border: 2px solid rgb(31, 31, 31);
 }
 
 #cardSelector {
@@ -56,6 +56,10 @@ body {
     min-height:800px;
     max-height:800px;
     display:none;
+}
+
+.title {
+    border-left: 2px solid red;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
